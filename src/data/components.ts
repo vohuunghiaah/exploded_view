@@ -32,7 +32,7 @@ export const COMPONENTS_DATA: Record<string, ComponentData> = {
     nameVi: 'Viền màn hình (Mặt B)',
     nameEn: 'Display Bezel (B-Cover)',
     group: 'display',
-    status: 'verified',
+    status: 'reconstructed',
     descriptionVi: 'Khung viền màn hình siêu mỏng 3 cạnh bằng nhựa nhám đen với gờ nhô phía trên chứa webcam và micro.',
     functionVi: 'Cố định và viền kín tấm nền LCD vào nắp lưng mặt A, có dải đệm cao su giảm chấn khi gập máy.',
     specsVi: {
@@ -76,7 +76,7 @@ export const COMPONENTS_DATA: Record<string, ComponentData> = {
     nameVi: 'Cụm Webcam HD & Micro kép',
     nameEn: 'Webcam & Dual Microphones Module',
     group: 'display',
-    status: 'verified',
+    status: 'reconstructed',
     descriptionVi: 'Mạch webcam tích hợp cảm biến hình ảnh CMOS, đèn LED trạng thái và hệ thống micro mảng kép lọc tiếng ồn.',
     functionVi: 'Thu nhận video đàm thoại và âm thanh nổi, kết nối với công tắc vật lý E-shutter ở cạnh phải.',
     specsVi: {
@@ -97,7 +97,7 @@ export const COMPONENTS_DATA: Record<string, ComponentData> = {
     nameVi: 'Bản lề màn hình trái',
     nameEn: 'Left Display Hinge Mechanism',
     group: 'chassis',
-    status: 'verified',
+    status: 'reconstructed',
     descriptionVi: 'Cơ cấu bản lề trục thép hợp kim kẽm chịu lực xoay góc mở lên tới 180 độ.',
     functionVi: 'Liên kết nắp màn hình (A-Cover) với khung máy C-Cover, chịu lực gập mở hàng nghìn chu kỳ.',
     specsVi: {
@@ -118,7 +118,7 @@ export const COMPONENTS_DATA: Record<string, ComponentData> = {
     nameVi: 'Bản lề màn hình phải',
     nameEn: 'Right Display Hinge Mechanism',
     group: 'chassis',
-    status: 'verified',
+    status: 'reconstructed',
     descriptionVi: 'Cơ cấu bản lề trục thép hợp kim chịu lực bên phải khớp với cụm màn hình.',
     functionVi: 'Đảm bảo lực mở đối xứng cân bằng cho hai bên màn hình.',
     specsVi: {
@@ -225,12 +225,12 @@ export const COMPONENTS_DATA: Record<string, ComponentData> = {
     nameVi: 'Bo mạch chủ L-Shape',
     nameEn: 'Main System Board (Motherboard)',
     group: 'motherboard',
-    status: 'verified',
-    descriptionVi: 'Bo mạch chủ thiết kế chữ L tối ưu luồng gió kép, tích hợp chipset Intel HM770 và chip quản lý AI Lenovo LA1.',
+    status: 'reconstructed',
+    descriptionVi: 'Bo mạch chủ thiết kế chữ L tối ưu luồng gió kép, tích hợp chipset Intel HM670 và chip quản lý AI Lenovo LA1.',
     functionVi: 'Trung tâm kết nối và điều phối toàn bộ tín hiệu bus dữ liệu giữa CPU, GPU, RAM, SSD và các cổng ngoại vi.',
     specsVi: {
       'Kiến trúc': 'Multi-layer High-speed PCB chuẩn quân đội',
-      'Chipset': 'Intel HM770 Express Chipset',
+      'Chipset': 'Intel HM670 Express Chipset (Lenovo PSREF Spec)',
       'Chip AI': 'Lenovo LA1 AI Engine quản lý điện áp và quạt thông minh',
       'Cổng tích hợp': 'Audio combo 3.5mm, USB-A bên phải, E-shutter switch',
     },
@@ -311,13 +311,13 @@ export const COMPONENTS_DATA: Record<string, ComponentData> = {
     nameVi: 'Hệ thống tản nhiệt Hyperchamber',
     nameEn: 'Hyperchamber Thermal Module & Pipes',
     group: 'thermal',
-    status: 'verified',
+    status: 'reconstructed',
     descriptionVi: 'Cụm tản nhiệt buồng kín Hyperchamber cải tiến năm 2024, gồm đế đồng tiếp xúc và các ống dẫn nhiệt composite.',
     functionVi: 'Hút nhiệt tức thì từ CPU, GPU và dàn VRM, dẫn truyền nhanh chóng về hai cụm lá tản nhiệt phía sau.',
     specsVi: {
       'Ống tản nhiệt': 'Ống đồng composite D8 nối dài qua CPU và GPU',
       'Đế tiếp xúc': 'Đồng nguyên chất dập nổi chính xác tiếp xúc die chip',
-      'Cố định': '6x ốc định lực có lò xo đánh số thứ tự siết cân bằng',
+      'Cố định': '5x ốc lò xo dập chữ A-E tháo theo thứ tự A->E, siết ngược E->A chuẩn HMM (lực 1.85 kgf-cm)',
       'Ưu điểm': 'Giảm nhiệt độ bề mặt vỏ máy và giảm độ ồn quạt đáng kể',
     },
     technicalReference: 'Lenovo Hyperchamber Thermal Architecture Whitepaper / HMM',
@@ -333,7 +333,7 @@ export const COMPONENTS_DATA: Record<string, ComponentData> = {
     nameVi: 'Quạt làm mát CPU (Trái)',
     nameEn: 'CPU Centrifugal Blower Fan',
     group: 'thermal',
-    status: 'verified',
+    status: 'reconstructed',
     descriptionVi: 'Quạt ly tâm lồng sóc cánh siêu mỏng chịu nhiệt cao, quay ngược chiều để tối ưu hóa hướng luồng gió.',
     functionVi: 'Hút không khí mát từ khe đáy máy và đẩy qua các lá tản nhiệt CPU ra khe thoát khí phía sau.',
     specsVi: {
@@ -354,7 +354,7 @@ export const COMPONENTS_DATA: Record<string, ComponentData> = {
     nameVi: 'Quạt làm mát GPU (Phải)',
     nameEn: 'GPU Centrifugal Blower Fan',
     group: 'thermal',
-    status: 'verified',
+    status: 'reconstructed',
     descriptionVi: 'Quạt ly tâm làm mát phía GPU với thiết kế cánh lồng sóc khí động học cao cấp.',
     functionVi: 'Đảm bảo tản nhiệt ổn định cho GPU khi chạy các tựa game nặng ở mức TGP tối đa.',
     specsVi: {
@@ -375,7 +375,7 @@ export const COMPONENTS_DATA: Record<string, ComponentData> = {
     nameVi: 'Lá tản nhiệt đồng phía sau',
     nameEn: 'Rear Copper Fin Stacks (Radiators)',
     group: 'thermal',
-    status: 'verified',
+    status: 'reconstructed',
     descriptionVi: 'Hai khối lá tản nhiệt bằng hợp kim đồng mật độ cao đặt ngay trước hai khe thoát khí sau máy.',
     functionVi: 'Tăng diện tích tiếp xúc với luồng khí cưỡng bức để giải phóng nhiệt ra môi trường.',
     specsVi: {
@@ -395,7 +395,7 @@ export const COMPONENTS_DATA: Record<string, ComponentData> = {
     nameVi: 'Nắp chắn kim loại bảo vệ RAM',
     nameEn: 'RAM Metal Shielding Can',
     group: 'components',
-    status: 'verified',
+    status: 'reconstructed',
     descriptionVi: 'Hộp kim loại dập nổi bảo vệ khe RAM chống nhiễu điện từ (EMI) tích hợp miếng tản nhiệt thermal pad bên trong.',
     functionVi: 'Chống nhiễu tần số cao cho bus DDR5 và dẫn nhiệt từ các chip nhớ ra khung máy.',
     specsVi: {
@@ -547,7 +547,7 @@ export const COMPONENTS_DATA: Record<string, ComponentData> = {
     nameVi: 'Loa âm thanh nổi trái (2W)',
     nameEn: 'Left Stereo Speaker Module',
     group: 'audio',
-    status: 'verified',
+    status: 'reconstructed',
     descriptionVi: 'Hộp cộng hưởng âm thanh nổi 2W nằm ở cạnh trước bên trái máy có đệm cao su giảm rung chấn.',
     functionVi: 'Tái tạo âm thanh đa chiều Nahimic Audio cho game thủ.',
     specsVi: {
@@ -567,7 +567,7 @@ export const COMPONENTS_DATA: Record<string, ComponentData> = {
     nameVi: 'Loa âm thanh nổi phải (2W)',
     nameEn: 'Right Stereo Speaker Module',
     group: 'audio',
-    status: 'verified',
+    status: 'reconstructed',
     descriptionVi: 'Hộp loa 2W phía trước bên phải tạo hiệu ứng âm thanh vòm nổi tách bạch.',
     functionVi: 'Đảm bảo trải nghiệm âm thanh nổi sống động trong không gian game.',
     specsVi: {

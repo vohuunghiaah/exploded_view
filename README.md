@@ -32,9 +32,9 @@
 - **Giao diện người dùng:** React 19 + TypeScript + Vite + Tailwind CSS.
 - **Hiển thị 3D & WebGL:** Three.js, React Three Fiber (`@react-three/fiber`), Drei (`@react-three/drei`).
 - **Chuyển động & Timeline:** GSAP (GreenSock Animation Platform) kết hợp slerp/lerp nội suy khung hình 60 FPS.
-- **Định dạng tài sản 3D:** GLB / glTF 2.0 chuẩn PBR (Physically Based Rendering), tối ưu hóa lưới dưới 1MB giúp tải nhanh tức thì trên web.
-- **Tái tạo mô hình 3D:** Script Node.js sử dụng Three.js và GLTFExporter (`scripts/generate_loq_model.js`).
-- **Kiểm thử tự động:** Playwright kiểm thử đầu cuối (End-to-End) trên trình duyệt Chromium WebGL.
+- **Định dạng tài sản 3D:** GLB / glTF 2.0 chuẩn PBR (Physically Based Rendering), mô hình lưới chi tiết tối ưu hóa (1.09 MB) tải nhanh trên web.
+- **Tái tạo mô hình 3D:** Script Node.js Three.js & GLTFExporter (`scripts/generate_loq_model.js`) tái dựng chính xác theo thông số cơ khí thực tế.
+- **Kiểm thử tự động:** Playwright E2E gồm 13 kịch bản kiểm thử toàn diện trên trình duyệt Chromium WebGL.
 
 ---
 
@@ -43,22 +43,25 @@
 ```
 exploded_view/
 ├── docs/
-│   ├── HARDWARE_SPECS.md        # Thông số kỹ thuật chi tiết từ Lenovo PSREF & HMM
-│   ├── VERIFICATION_MATRIX.md   # Ma trận xác thực 20+ linh kiện chính hãng
+│   ├── HARDWARE_SPECS.md        # Thông số kỹ thuật chi tiết từ Lenovo PSREF & HMM (HM670)
+│   ├── MODEL_REFERENCE.md       # Bảng đối chiếu tham chiếu hình học 3D & mức độ tin cậy
+│   ├── VERIFICATION_MATRIX.md   # Ma trận xác thực linh kiện chuẩn PSREF vs Reconstructed
+│   ├── QUALITY_GATE.md          # Báo cáo thẩm định nghiệm thu 5 góc nhìn chất lượng cao
 │   ├── LIMITATIONS.md           # Báo cáo giới hạn và độ chính xác kỹ thuật
-│   └── TEST_RESULTS.md          # Báo cáo kết quả kiểm thử tự động Playwright (8/8 Pass)
+│   ├── TEST_RESULTS.md          # Báo cáo kết quả kiểm thử tự động Playwright (13/13 Pass)
+│   └── visual-review/           # 5 ảnh chụp góc máy thẩm định nghiệm thu chính thức
 ├── public/
 │   └── models/
-│       └── lenovo_loq_15iax9.glb # Tệp mô hình 3D nhị phân tiêu chuẩn (728 KB)
+│       └── lenovo_loq_15iax9.glb # Tệp mô hình 3D nhị phân tiêu chuẩn PBR (1.09 MB, 31 nodes)
 ├── scripts/
-│   └── generate_loq_model.js    # Mã nguồn tạo/tái tạo mô hình 3D từ thông số cơ khí
+│   └── generate_loq_model.js    # Script tái dựng mô hình 3D theo nguyên tắc MODEL-FIRST
 ├── src/
 │   ├── components/
 │   │   ├── 3d/
 │   │   │   ├── CanvasContainer.tsx   # Cảnh dựng 3D, ánh sáng studio, bóng đổ
-│   │   │   ├── LaptopModel.tsx       # Tải GLB, quản lý biến đổi phân rã & vật liệu
+│   │   │   ├── LaptopModel.tsx       # Tải GLB, quản lý biến đổi phân rã, bản lề & RAM/SSD tilt
 │   │   │   ├── CoolingAnimation.tsx  # Quạt quay ly tâm & luồng hạt tản nhiệt
-│   │   │   └── CameraManager.tsx     # Điều khiển camera điện ảnh, presets & tour
+│   │   │   └── CameraManager.tsx     # Điều khiển camera điện ảnh, presets & framing động
 │   │   └── ui/
 │   │       ├── Header.tsx            # Thanh điều hướng và chuyển đổi chế độ
 │   │       ├── LeftSidebar.tsx       # Bảng thanh trượt, cây linh kiện, tốc độ quạt
@@ -69,8 +72,8 @@ exploded_view/
 │   │       ├── RAMSSDModal.tsx       # Hướng dẫn thao tác tháo lắp RAM & SSD góc 30°
 │   │       └── PerformanceMonitor.tsx# Giám sát FPS và chỉ số dựng hình thời gian thực
 │   ├── data/
-│   │   ├── components.ts        # Cơ sở dữ liệu linh kiện đã xác minh
-│   │   ├── assemblySteps.ts     # Quy trình tháo lắp 10 bước chuẩn HMM
+│   │   ├── components.ts        # Cơ sở dữ liệu linh kiện đã xác minh (HM670, screws A-E)
+│   │   ├── assemblySteps.ts     # Quy trình tháo lắp 10 bước chuẩn HMM Type 83GS
 │   │   └── tourScenes.ts        # Kịch bản 10 cảnh tham quan kỹ thuật
 │   ├── types/
 │   │   └── hardware.ts          # Định nghĩa kiểu dữ liệu TypeScript
@@ -78,8 +81,9 @@ exploded_view/
 │   └── main.tsx
 ├── tests/
 │   ├── e2e/
-│   │   └── explorer.spec.ts     # Bộ kịch bản kiểm thử Playwright toàn diện
-│   └── screenshots/             # 9 ảnh chụp màn hình nghiệm thu thực tế
+│   │   ├── explorer.spec.ts     # Kịch bản kiểm thử giao diện & tính năng người dùng (8 tests)
+│   │   └── quality_gate.spec.ts # Kịch bản thẩm định chất lượng hình học & động học (5 tests)
+│   └── screenshots/             # Ảnh chụp màn hình nghiệm thu thực tế
 ├── playwright.config.ts         # Cấu hình Playwright WebGL
 └── package.json
 ```

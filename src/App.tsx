@@ -199,6 +199,7 @@ export function App() {
         viewMode={viewMode}
         explodeAmount={explodeAmount}
         onChangeExplodeAmount={(amt) => {
+          if (explodeTweenRef.current) explodeTweenRef.current.kill();
           setExplodeAmount(amt);
           if (viewMode !== 'exploded' && amt > 0.05) setViewMode('exploded');
         }}

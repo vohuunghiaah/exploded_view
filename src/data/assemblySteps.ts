@@ -111,8 +111,8 @@ export const ASSEMBLY_STEPS: AssemblyStep[] = [
     id: 'step_thermal',
     titleVi: 'Bước 7: Tháo cụm tản nhiệt Hyperchamber & 2 quạt',
     titleEn: 'Step 7: Hyperchamber Thermal Module & Fans Removal',
-    actionVi: 'Rút 2 đầu cắm quạt 4-pin. Nới lỏng 6 ốc lò xo theo thứ tự đảo ngược in trên bo mạch (6 -> 1) để giải phóng lực ép đều lên die chip, nhấc cụm tản nhiệt ra.',
-    actionEn: 'Unplug fan headers. Loosen spring screws in reverse numerical sequence stamped on heatsink (6 to 1) to balance die pressure, then lift thermal unit.',
+    actionVi: 'Rút 2 đầu cắm quạt 4-pin. Nới lỏng 5 ốc lò xo theo thứ tự chữ cái dập trên tấm tản nhiệt (A -> B -> C -> D -> E) theo chuẩn Lenovo HMM để giải phóng lực nén đều, sau đó nhấc cụm tản nhiệt ra ngoài.',
+    actionEn: 'Unplug dual fan headers. Loosen 5 captive spring screws in alphabetical order (A -> B -> C -> D -> E) as stamped on thermal plate to release spring tension evenly, then lift out the thermal module.',
     affectedComponents: ['thermal_module', 'fan_cpu', 'fan_gpu', 'heatsink_fins'],
     cameraFocus: {
       position: [0, 0.15, 0.06],
@@ -120,8 +120,8 @@ export const ASSEMBLY_STEPS: AssemblyStep[] = [
     },
     duration: 4.0,
     cruFruType: 'FRU',
-    torqueOrTool: 'Tuốc nơ vít PH0 / Khăn lau cồn vệ sinh keo',
-    notesVi: 'Vệ sinh sạch keo tản nhiệt cũ trên CPU/GPU trước khi tra keo mới khi lắp ráp lại.',
+    torqueOrTool: 'Tuốc nơ vít PH0 / Lực siết siết lại 1.85 ± 0.15 kgf-cm (thứ tự ngược E -> A)',
+    notesVi: 'Quy tắc HMM: Khi tháo nới dần A đến E; khi lắp siết đều ngược từ E về A để không cong vênh die silicon.',
   },
   {
     stepNumber: 8,

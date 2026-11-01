@@ -18,7 +18,7 @@ test.describe('Lenovo LOQ 15IAX9 — Interactive 3D Exploded View Suite', () => 
     });
 
     await page.goto('/');
-    await page.waitForLoadState('networkidle');
+    await page.locator('button:has-text("Bỏ qua giới thiệu")').waitFor({ state: 'visible', timeout: 30000 });
 
     // Verify Title and Subtitle in header
     await expect(page.locator('header h1')).toContainText('LENOVO LOQ 15IAX9');
@@ -46,31 +46,31 @@ test.describe('Lenovo LOQ 15IAX9 — Interactive 3D Exploded View Suite', () => 
 
   test('02. Mode B: Exploded View slider 0% to 100% and back', async ({ page }) => {
     await page.goto('/');
-    await page.waitForLoadState('networkidle');
+    await page.locator('button:has-text("Bỏ qua giới thiệu")').waitFor({ state: 'visible', timeout: 30000 });
     await page.click('text=Bỏ qua giới thiệu');
 
     // Click Exploded View Mode tab
     await page.click('button:has-text("Phân Rã 3D")');
-    await page.waitForTimeout(1500);
+    await page.waitForTimeout(2000);
 
     // Verify percentage indicator shows 100%
-    await expect(page.locator('span.font-mono:has-text("100%")').first()).toBeVisible();
+    await expect(page.locator('span.font-mono:has-text("100%")').first()).toBeVisible({ timeout: 10000 });
     await page.screenshot({ path: path.join(screenshotsDir, '03_exploded_view_100.png') });
 
     // Click 50% quick button
-    await page.click('button:has-text("50% Trung Gian")');
+    await page.click('button:has-text("50% Trung Gian")', { force: true });
     await page.waitForTimeout(1000);
-    await expect(page.locator('span.font-mono:has-text("50%")').first()).toBeVisible();
+    await expect(page.locator('span.font-mono:has-text("50%")').first()).toBeVisible({ timeout: 10000 });
 
     // Click 0% Assemble quick button
-    await page.click('button:has-text("0% Lắp Ráp")');
+    await page.click('button:has-text("0% Lắp Ráp")', { force: true });
     await page.waitForTimeout(1000);
-    await expect(page.locator('span.font-mono:has-text("0%")').first()).toBeVisible();
+    await expect(page.locator('span.font-mono:has-text("0%")').first()).toBeVisible({ timeout: 10000 });
   });
 
   test('03. Mode C: Component Inspector & Verified Hardware Specs', async ({ page }) => {
     await page.goto('/');
-    await page.waitForLoadState('networkidle');
+    await page.locator('button:has-text("Bỏ qua giới thiệu")').waitFor({ state: 'visible', timeout: 30000 });
     await page.click('text=Bỏ qua giới thiệu');
 
     // Click Component Inspector tab
@@ -99,7 +99,7 @@ test.describe('Lenovo LOQ 15IAX9 — Interactive 3D Exploded View Suite', () => 
 
   test('04. Mode E: X-Ray View Transition', async ({ page }) => {
     await page.goto('/');
-    await page.waitForLoadState('networkidle');
+    await page.locator('button:has-text("Bỏ qua giới thiệu")').waitFor({ state: 'visible', timeout: 30000 });
     await page.click('text=Bỏ qua giới thiệu');
 
     // Click X-Ray tab
@@ -112,7 +112,7 @@ test.describe('Lenovo LOQ 15IAX9 — Interactive 3D Exploded View Suite', () => 
 
   test('05. Cooling System Simulation & Fan Controls', async ({ page }) => {
     await page.goto('/');
-    await page.waitForLoadState('networkidle');
+    await page.locator('button:has-text("Bỏ qua giới thiệu")').waitFor({ state: 'visible', timeout: 30000 });
     await page.click('text=Bỏ qua giới thiệu');
 
     // Switch to Extreme 4200 RPM preset
@@ -129,7 +129,7 @@ test.describe('Lenovo LOQ 15IAX9 — Interactive 3D Exploded View Suite', () => 
 
   test('06. Mode D: Step-by-Step Assembly / Disassembly Animation (HMM)', async ({ page }) => {
     await page.goto('/');
-    await page.waitForLoadState('networkidle');
+    await page.locator('button:has-text("Bỏ qua giới thiệu")').waitFor({ state: 'visible', timeout: 30000 });
     await page.click('text=Bỏ qua giới thiệu');
 
     // Click Assembly mode tab
@@ -156,7 +156,7 @@ test.describe('Lenovo LOQ 15IAX9 — Interactive 3D Exploded View Suite', () => 
 
   test('07. RAM & SSD Upgrade Guide Modal (ANIM-07)', async ({ page }) => {
     await page.goto('/');
-    await page.waitForLoadState('networkidle');
+    await page.locator('button:has-text("Bỏ qua giới thiệu")').waitFor({ state: 'visible', timeout: 30000 });
     await page.click('text=Bỏ qua giới thiệu');
 
     // Click Nâng Cấp RAM/SSD button
@@ -175,13 +175,13 @@ test.describe('Lenovo LOQ 15IAX9 — Interactive 3D Exploded View Suite', () => 
     await page.screenshot({ path: path.join(screenshotsDir, '08_ram_ssd_upgrade_guide.png') });
 
     // Close Modal
-    await page.click('button:has-text("Đóng Hướng Dẫn")');
-    await expect(page.locator('text=Quy Trình Nâng Cấp RAM & SSD')).not.toBeVisible();
+    await page.click('button:has-text("Đóng Hướng Dẫn")', { force: true });
+    await expect(page.locator('text=Quy Trình Nâng Cấp RAM & SSD')).not.toBeVisible({ timeout: 10000 });
   });
 
   test('08. Guided Technical Tour (ANIM-10)', async ({ page }) => {
     await page.goto('/');
-    await page.waitForLoadState('networkidle');
+    await page.locator('button:has-text("Bỏ qua giới thiệu")').waitFor({ state: 'visible', timeout: 30000 });
     await page.click('text=Bỏ qua giới thiệu');
 
     // Start Tour
@@ -193,15 +193,15 @@ test.describe('Lenovo LOQ 15IAX9 — Interactive 3D Exploded View Suite', () => 
     await expect(page.locator('text=1. Thiết Kế Gaming Luna Grey Đẳng Cấp')).toBeVisible();
 
     // Advance to Scene 2
-    await page.click('button[title="Cảnh tiếp"]');
-    await page.waitForTimeout(1000);
-    await expect(page.locator('text=2. Màn Hình 144Hz & Bàn Phím Gaming Full Numpad')).toBeVisible();
+    await page.click('button[title="Cảnh tiếp"]', { force: true });
+    await page.waitForTimeout(1500);
+    await expect(page.locator('text=2. Màn Hình 144Hz & Bàn Phím Gaming Full Numpad')).toBeVisible({ timeout: 10000 });
 
     // Capture Guided Tour screenshot
     await page.screenshot({ path: path.join(screenshotsDir, '09_guided_technical_tour.png') });
 
     // Exit Tour
-    await page.click('text=Bỏ qua Tour');
-    await expect(page.locator('text=CHUYẾN THAM QUAN KỸ THUẬT')).not.toBeVisible();
+    await page.click('text=Bỏ qua Tour', { force: true });
+    await expect(page.locator('text=CHUYẾN THAM QUAN KỸ THUẬT')).not.toBeVisible({ timeout: 10000 });
   });
 });

@@ -29,7 +29,7 @@
 - **GPU Platform:** Dedicated NVIDIA GeForce RTX Laptop GPU
   - Reference configurations: NVIDIA GeForce RTX 3050 6GB GDDR6 / RTX 4050 6GB GDDR6 / RTX 4060 8GB GDDR6
   - Dedicated GDDR6 VRAM chips surrounding the GPU die
-- **Chipset:** Intel HM770
+- **Chipset:** Intel HM670 (Chính thức theo Lenovo PSREF LOQ 15IAX9)
 - **AI Engine:** Lenovo LA1 AI chip for dynamic CPU/GPU thermal power balancing
 
 ---
@@ -56,7 +56,7 @@
   - Thick shared D8 copper composite heat pipe bridging CPU and GPU
   - Dedicated CPU secondary heat pipe
   - Dedicated GPU secondary heat pipe with VRM/VRAM copper cold plates
-- **Mounting Order:** Captive spring-loaded screws numbered 1 to 6/7 for balanced thermal paste pressure
+- **Mounting & Sequence:** 5× captive spring-loaded screws stamped alphabetically A through E. Loosen in alphabetical sequence (A → B → C → D → E) during removal to relieve spring tension evenly; tighten in reverse alphabetical sequence (E → D → C → B → A) with specified torque $1.85 \pm 0.15\text{ kgf-cm}$ per Lenovo HMM.
 
 ---
 

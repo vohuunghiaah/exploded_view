@@ -1,51 +1,49 @@
 # Báo Cáo Kết Quả Kiểm Thử Nghiệm Thu (Automated Test Report)
-## Lenovo LOQ 15IAX9 — Interactive 3D Exploded View
+## Lenovo LOQ 15IAX9 (Type 83GS) — Interactive 3D Exploded View
 
 - **Thời gian thực thi:** 2026-11-01
 - **Môi trường thử nghiệm:** Windows, Chromium Engine (Headless WebGL 2.0 via ANGLE SwiftShader)
-- **Công cụ kiểm thử:** Playwright 1.64.1
-- **Kết quả tổng quát:** **8/8 bài kiểm thử đạt (100% Pass Rate)**
+- **Công cụ kiểm thử:** Playwright E2E Test Runner
+- **Kết quả tổng quát:** **13/13 bài kiểm thử đạt (100% Pass Rate)**
+  - Bộ kịch bản tương tác người dùng (`explorer.spec.ts`): 8/8 bài kiểm thử ĐẠT
+  - Bộ thẩm định kỹ thuật MODEL-FIRST & Quality Gate (`quality_gate.spec.ts`): 5/5 bài kiểm thử ĐẠT
 
 ---
 
-### Bảng Tổng Hợp Kịch Bản Kiểm Thử
+## 1. Bộ Kiểm Thử Quality Gate & Hình Học 3D (quality_gate.spec.ts)
+
+Bộ kiểm thử được thiết kế riêng nhằm xác thực triệt để các tiêu chí kỹ thuật P0, P1, P2 của mô hình:
+
+| Mã Test | Tên Bài Kiểm Thử | Trọng Tâm Xác Thực | Kết Quả |
+|---|---|---|---|
+| **QG-01** | Geometry & Dimensions Verification (P0/P1) | Kiểm tra WebGL Canvas render thực tế, tải thành công mô hình GLB 31 nodes, kích thước khung vỏ chuẩn xác. | **PASSED** |
+| **QG-02** | Capture 5 Mandatory Visual Review Angles | Tự động xuất 5 góc nhìn thẩm định nghiệm thu vào thư mục `docs/visual-review/` phục vụ đối chiếu trực quan. | **PASSED** |
+| **QG-03** | Screen Hinge Independence & Non-Overriding | Kiểm tra góc bản lề màn hình (0°, 115°, 180°), đảm bảo không bao giờ bị vòng lặp cập nhật ghi đè về góc ban đầu. | **PASSED** |
+| **QG-04** | RAM & SSD 3D Kinematic Installation Animation | Kiểm tra chuyển động lắp đặt cơ học góc nghiêng 30° và rút linh kiện theo ma trận 3D thực tế. | **PASSED** |
+| **QG-05** | Disassembly/Assembly Repeatability & Zero Drift | Kiểm tra tính ổn định toán học qua các chu kỳ phân rã/lắp ráp lặp lại, xác nhận ma trận hoàn nguyên chính xác 0%. | **PASSED** |
+
+---
+
+## 2. Bộ Kiểm Thử Tính Năng & Tương Tác 3D (explorer.spec.ts)
 
 | # | Tên Kịch Bản Kiểm Thử | Thời Gian | Kết Quả | Ảnh Chụp Nghiệm Thu |
 |---|---|---|---|---|
-| **01** | Khởi chạy ứng dụng, kiểm tra 3D Canvas, tiêu đề thiết bị và Cinematic Intro | 8.7s | **PASSED** | `tests/screenshots/01_assembled_view.png`<br>`tests/screenshots/02_cinematic_intro.png` |
-| **02** | Chế độ B: Exploded View thanh trượt 0% - 100% và cơ chế đảo chiều mượt mà | 14.3s | **PASSED** | `tests/screenshots/03_exploded_view_100.png` |
-| **03** | Chế độ C: Component Inspector, tra cứu thông số kỹ thuật và tính năng cô lập | 20.7s | **PASSED** | `tests/screenshots/04_component_inspector_motherboard.png` |
-| **04** | Chế độ E: Chuyển đổi trạng thái nhìn xuyên Tia X (X-Ray Transition) | 13.6s | **PASSED** | `tests/screenshots/05_xray_mode.png` |
-| **05** | ANIM-05: Mô phỏng hệ thống tản nhiệt Hyperchamber, tốc độ quạt 4200 RPM và luồng khí | 11.3s | **PASSED** | `tests/screenshots/06_cooling_system_simulation.png` |
-| **06** | Chế độ D: Hoạt ảnh tháo lắp 10 bước chuẩn Lenovo Hardware Maintenance Manual | 14.6s | **PASSED** | `tests/screenshots/07_assembly_step_by_step.png` |
-| **07** | ANIM-07: Hướng dẫn nâng cấp RAM DDR5 & M.2 PCIe 4.0 SSD góc nghiêng 30° | 12.1s | **PASSED** | `tests/screenshots/08_ram_ssd_upgrade_guide.png` |
-| **08** | ANIM-10: Chuyến tham quan kỹ thuật tự động 10 cảnh (Guided Technical Tour) | 17.6s | **PASSED** | `tests/screenshots/09_guided_technical_tour.png` |
+| **01** | Khởi chạy ứng dụng, kiểm tra 3D Canvas, tiêu đề thiết bị và Cinematic Intro | ~8s | **PASSED** | `tests/screenshots/01_assembled_view.png`<br>`tests/screenshots/02_cinematic_intro.png` |
+| **02** | Chế độ B: Exploded View thanh trượt 0% - 100% và cơ chế đảo chiều mượt mà | ~12s | **PASSED** | `tests/screenshots/03_exploded_view_100.png` |
+| **03** | Chế độ C: Component Inspector, tra cứu thông số kỹ thuật và tính năng cô lập | ~18s | **PASSED** | `tests/screenshots/04_component_inspector_motherboard.png` |
+| **04** | Chế độ E: Chuyển đổi trạng thái nhìn xuyên Tia X (X-Ray Transition) | ~10s | **PASSED** | `tests/screenshots/05_xray_mode.png` |
+| **05** | ANIM-05: Mô phỏng hệ thống tản nhiệt Hyperchamber, tốc độ quạt 4200 RPM và luồng khí | ~11s | **PASSED** | `tests/screenshots/06_cooling_system_simulation.png` |
+| **06** | Chế độ D: Hoạt ảnh tháo lắp 10 bước chuẩn Lenovo Hardware Maintenance Manual | ~12s | **PASSED** | `tests/screenshots/07_assembly_step_by_step.png` |
+| **07** | ANIM-07: Hướng dẫn nâng cấp RAM DDR5 & M.2 PCIe 4.0 SSD góc nghiêng 30° | ~10s | **PASSED** | `tests/screenshots/08_ram_ssd_upgrade_guide.png` |
+| **08** | ANIM-10: Chuyến tham quan kỹ thuật tự động 10 cảnh (Guided Technical Tour) | ~15s | **PASSED** | `tests/screenshots/09_guided_technical_tour.png` |
 
 ---
 
-### Chi Tiết Xác Thực Kỹ Thuật
+## 3. Thư Viện Ảnh Thẩm Định Nghiệm Thu (Visual Review Assets)
 
-1. **Khởi tạo 3D & WebGL (Test 01):**
-   - WebGL Canvas khởi tạo ổn định với ACESFilmicToneMapping, bóng đổ mềm PCFSoftShadowMap.
-   - Không xuất hiện bất kỳ lỗi nghiêm trọng console nào trong phiên làm việc.
-   - Đoạn giới thiệu điện ảnh (Cinematic Intro) phát mượt mà và nút "Bỏ qua giới thiệu" phản hồi ngay lập tức.
-
-2. **Cơ cấu phân rã Exploded View (Test 02):**
-   - Thanh trượt điều khiển trực tiếp vector dịch chuyển 3D của 20+ linh kiện độc lập.
-   - Các nút preset 0% (Lắp ráp), 50% (Trung gian), 100% (Phân rã hoàn toàn) nội suy vị trí chính xác không làm sai lệch vị trí gốc ban đầu.
-
-3. **Soi linh kiện & Thông số kỹ thuật (Test 03):**
-   - Bộ tìm kiếm và lọc phân nhóm linh kiện phản hồi tức thời.
-   - Nhấp chọn linh kiện kích hoạt camera framing mượt mà tới vị trí mục tiêu.
-   - Bảng thông tin bên phải hiển thị đầy đủ nhãn `ĐÃ XÁC MINH CHÍNH HÃNG`, mã linh kiện FRU (như pin 60Wh L23M4PC0, bo mạch chủ Intel HM770), thông số chi tiết và trích dẫn tài liệu Lenovo.
-   - Tính năng "Cô lập linh kiện" (Isolate) ẩn thành công các bộ phận xung quanh để quan sát độc lập.
-
-4. **Trực quan hóa tản nhiệt Hyperchamber (Test 05):**
-   - Hai quạt lồng sóc quay quanh trục Y chuẩn xác theo nguyên lý thổi gió ly tâm.
-   - Các mức tốc độ Yên tĩnh (1800 RPM), Cân bằng (2800 RPM), Cực đại (4200 RPM) thay đổi trực tiếp tần số quay và vận tốc hạt luồng khí.
-   - Gradient nhiệt hiển thị chính xác các vùng tỏa nhiệt cao (đỏ/cam trên die CPU, GPU và ống đồng) và luồng gió lạnh (xanh dương ở khe hút gió đáy).
-
-5. **Quy trình tháo lắp chuẩn Lenovo HMM 10 bước (Test 06):**
-   - 10 bước tháo lắp từ Nắp đáy D-Cover, Pin 60Wh, Loa, RAM, SSD, Wi-Fi, Tản nhiệt, Màn hình đến Bo mạch chủ.
-   - Thao tác chuyển bước (Next/Prev/Direct Step) và nhãn CRU/FRU hiển thị đồng bộ.
-
+Được lưu trữ tại `docs/visual-review/`:
+1. `01_quarter_open_view.png`: Góc 3/4 Isometric máy mở chuẩn 115°, viền màn hình mỏng, cụm phím Inverted-T, bàn phím số 4 cột, touchpad lệch trái.
+2. `02_closed_top_down_view.png`: Góc nhìn thẳng từ trên xuống khi gập phẳng 0°, nắp A Luna Grey dập logo LOQ và gờ tản nhiệt đuôi máy nhô ra sau bản lề.
+3. `03_bottom_cover_view.png`: Mặt đáy D-Cover với lưới hút gió tổ ong kép và chân đệm cao su nâng máy.
+4. `04_hardware_internal_view.png`: Nội thất bo mạch L-Shape, 2 quạt ly tâm cánh cong, cụm 3 ống đồng tản nhiệt với 5 ốc A–E, pin 60Wh, lồng chắn RAM và 2 khe SSD.
+5. `05_full_exploded_view.png`: Toàn cảnh phân rã 3D 100% tách bạch các tầng vật lý theo không gian thực tế.

@@ -3,6 +3,7 @@
 
 import React, { useRef, useEffect } from 'react';
 import { useThree } from '@react-three/fiber';
+import * as THREE from 'three';
 import gsap from 'gsap';
 import type { CameraPreset, ViewMode } from '../../types/hardware';
 import { COMPONENTS_DATA } from '../../data/components';
@@ -40,7 +41,7 @@ export const CameraManager: React.FC<CameraManagerProps> = ({
   tourCameraPos,
   tourCameraTarget,
 }) => {
-  const { camera, controls } = useThree();
+  const { camera, controls, scene } = useThree();
   const tweenRef = useRef<gsap.core.Tween | null>(null);
 
   // Helper to smoothly animate camera position and target
@@ -138,13 +139,30 @@ export const CameraManager: React.FC<CameraManagerProps> = ({
     }
   }, [cameraPreset]);
 
-  // 3. Handle Component Focus in Inspector Mode (ANIM-04)
+  // 3. Handle Dynamic Component Focus in Inspector Mode (ANIM-04)
+  // Computes actual current world position so camera frames the part wherever it is (0% or 100% exploded)
   useEffect(() => {
-    if (viewMode === 'inspector' && selectedComponentId && COMPONENTS_DATA[selectedComponentId]) {
-      const comp = COMPONENTS_DATA[selectedComponentId];
-      animateCameraTo(comp.focusCamera.position, comp.focusCamera.target, 1.2, 'power2.out');
+    if (viewMode === 'inspector' && selectedComponentId) {
+      const targetObj = scene.getObjectByName(selectedComponentId);
+      if (targetObj) {
+        const worldPos = new THREE.Vector3();
+        targetObj.getWorldPosition(worldPos);
+
+        // Frame camera with an optimal offset relative to live component world position
+        const targetCamPos: [number, number, number] = [
+          worldPos.x + 0.06,
+          worldPos.y + 0.12,
+          worldPos.z + 0.16,
+        ];
+        const lookTarget: [number, number, number] = [worldPos.x, worldPos.y, worldPos.z];
+
+        animateCameraTo(targetCamPos, lookTarget, 1.2, 'power2.out');
+      } else if (COMPONENTS_DATA[selectedComponentId]) {
+        const comp = COMPONENTS_DATA[selectedComponentId];
+        animateCameraTo(comp.focusCamera.position, comp.focusCamera.target, 1.2, 'power2.out');
+      }
     }
-  }, [viewMode, selectedComponentId]);
+  }, [viewMode, selectedComponentId, scene]);
 
   // 4. Handle Guided Tour Tracking (ANIM-10)
   useEffect(() => {
