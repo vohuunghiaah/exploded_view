@@ -48,3 +48,4 @@
 5. **Quy trình tháo lắp chuẩn Lenovo HMM 10 bước (Test 06):**
    - 10 bước tháo lắp từ Nắp đáy D-Cover, Pin 60Wh, Loa, RAM, SSD, Wi-Fi, Tản nhiệt, Màn hình đến Bo mạch chủ.
    - Thao tác chuyển bước (Next/Prev/Direct Step) và nhãn CRU/FRU hiển thị đồng bộ.
+
